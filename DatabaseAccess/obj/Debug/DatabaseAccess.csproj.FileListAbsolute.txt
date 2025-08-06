@@ -1,0 +1,12 @@
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\DatabaseAccess.dll.config
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\DatabaseAccess.dll
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\DatabaseAccess.pdb
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\EntityFramework.dll
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\EntityFramework.xml
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\obj\Debug\DatabaseAccess.csproj.AssemblyReference.cache
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\obj\Debug\DatabaseAccess.csproj.CoreCompileInputs.cache
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\obj\Debug\Database.3C889C45.Up2Date
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\obj\Debug\DatabaseAccess.dll
+D:\FYP Company Mgt Sys(Cloud ERP) Small Business\Application\CloudERP\DatabaseAccess\obj\Debug\DatabaseAccess.pdb
