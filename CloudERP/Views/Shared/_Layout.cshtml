@@ -34,15 +34,15 @@
                     <a class="navbar-brand" href="#/">
                         <div class="brand-logo">
                             @{
-                                    string logo= string.Empty;
-                                    if (string.IsNullOrEmpty(Convert.ToString(Session["Logo"])))
-                                    {
-                                        logo = "~/Content/Template/img/logo-single.png";
-                                    }
-                                    else
-                                    {
-                                        logo = Convert.ToString(Session["Logo"]);
-                                    }
+                                string logo = string.Empty;
+                                if (string.IsNullOrEmpty(Convert.ToString(Session["Logo"])))
+                                {
+                                    logo = "~/Content/Template/img/logo-single.png";
+                                }
+                                else
+                                {
+                                    logo = Convert.ToString(Session["Logo"]);
+                                }
                             }
                             <img class="img-fluid" src="@Url.Content(logo)" alt="App Logo" height="30" width="30">
                         </div>
@@ -74,7 +74,7 @@
                     <!-- END User avatar toggle-->
                     <!-- START lock screen-->
                     <li class="nav-item d-none d-md-block">
-                        <a class="nav-link" href="lock.html" title="Lock screen">
+                        <a class="nav-link" href="@Url.Action("Logout","Home")" title="Lock screen">
                             <em class="icon-lock"></em>
                         </a>
                     </li>
@@ -264,6 +264,16 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li class="nav-heading ">
+                            <span data-localize="sidebar.heading.COMPONENTS">User Setting</span>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Index","tblUserTypes")" title="User Types">
+                                <em class="icon-chemistry"></em>
+                                <span data-localize="sidebar.nav.element.ELEMENTS">User Types</span>
+                            </a>
                         </li>
                         <li class="nav-heading ">
                             <span data-localize="sidebar.heading.COMPONENTS">Components</span>

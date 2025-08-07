@@ -11,6 +11,11 @@ namespace CloudERP.Controllers
         DatabaseAccess.CloudErpV1Entities db = new DatabaseAccess.CloudErpV1Entities();
         public ActionResult Index()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login");
+                    
+            }
             return View();
         }
 
@@ -34,7 +39,8 @@ namespace CloudERP.Controllers
                 Session["Password"] = user.Password;
                 Session["IsActive"] = user.IsActive;
                 var EmployeeDetails = db.tblEmployees.Where(e => e.UserID == user.UserID).FirstOrDefault();
-                if (EmployeeDetails == null) {
+                if (EmployeeDetails == null)
+                {
 
                     ViewBag.Message = "Please Contact to Adminstrator";
                     Session["UserTypeID"] = string.Empty;
@@ -62,7 +68,8 @@ namespace CloudERP.Controllers
                 Session["CompanyID"] = EmployeeDetails.CompanyID;
 
                 var company = db.tblCompanies.Where(c => c.CompanyID == EmployeeDetails.CompanyID).FirstOrDefault();
-                if (company == null) {
+                if (company == null)
+                {
 
                     ViewBag.Message = "Please Contact to Adminstrator";
                     Session["UserTypeID"] = string.Empty;
@@ -101,6 +108,25 @@ namespace CloudERP.Controllers
                 Session["BranchID"] = string.Empty;
                 Session["CompanyID"] = string.Empty;
             }
+            return View("Login");
+        }
+
+        public ActionResult LogOut()
+        {
+            ViewBag.Message = "incorrect creditionals";
+            Session["UserTypeID"] = string.Empty;
+            Session["FullName"] = string.Empty;
+            Session["Email"] = string.Empty;
+            Session["ContactNo"] = string.Empty;
+            Session["UserName"] = string.Empty;
+            Session["Password"] = string.Empty;
+            Session["IsActive"] = string.Empty;
+            Session["EmployeeID"] = string.Empty;
+            Session["EName"] = string.Empty;
+            Session["EPhoto"] = string.Empty;
+            Session["Designation"] = string.Empty;
+            Session["BranchID"] = string.Empty;
+            Session["CompanyID"] = string.Empty;
             return View("Login");
         }
 

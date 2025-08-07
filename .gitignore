@@ -1,0 +1,12 @@
+# Visual Studio ve Rider gibi IDE'lerin geçici ve kişisel ayar dosyaları
+.vs/
+*.suo
+*.user
+
+# Derleme çıktıları
+[Bb]in/
+[Oo]bj/
+
+# Diğer geçici dosyalar
+*.db-shm
+*.db-wal
