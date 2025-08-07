@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CloudERP.HelperCls;
+using DatabaseAccess;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,26 +8,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DatabaseAccess;
 
 namespace CloudERP.Controllers
 {
-    public class tblUserTypesController : Controller
+    public class tblCompaniesController : Controller
     {
         private CloudErpV1Entities db = new CloudErpV1Entities();
 
-        // GET: tblUserTypes
+        // GET: tblCompanies
         public ActionResult Index()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login","Home");
 
             }
-            return View(db.tblUserTypes.ToList());
+            return View(db.tblCompanies.ToList());
         }
 
-        // GET: tblUserTypes/Details/5
+        // GET: tblCompanies/Details/5
         public ActionResult Details(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
@@ -37,15 +38,15 @@ namespace CloudERP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblUserType tblUserType = db.tblUserTypes.Find(id);
-            if (tblUserType == null)
+            tblCompany tblCompany = db.tblCompanies.Find(id);
+            if (tblCompany == null)
             {
                 return HttpNotFound();
             }
-            return View(tblUserType);
+            return View(tblCompany);
         }
 
-        // GET: tblUserTypes/Create
+        // GET: tblCompanies/Create
         public ActionResult Create()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
@@ -56,12 +57,12 @@ namespace CloudERP.Controllers
             return View();
         }
 
-        // POST: tblUserTypes/Create
+        // POST: tblCompanies/Create
         // Aşırı gönderim saldırılarından korunmak için bağlamak istediğiniz belirli özellikleri etkinleştirin. 
         // Daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(tblUserType tblUserType)
+        public ActionResult Create(tblCompany tblCompany)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
             {
@@ -70,15 +71,28 @@ namespace CloudERP.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.tblUserTypes.Add(tblUserType);
+                db.tblCompanies.Add(tblCompany);
                 db.SaveChanges();
+                if (tblCompany.LogoFile != null)
+                {
+                    var folder = "~/Content/CompanyLogos";
+                    var file = string.Format("{0}.jpg", tblCompany.CompanyID);
+                    var response = FileHelpers.UploadPhoto(tblCompany.LogoFile, folder, file);
+                    if (response)
+                    {
+                        var pic = string.Format("{0}/{1}", folder, file);
+                        tblCompany.Logo = pic;
+                        db.Entry(tblCompany).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
                 return RedirectToAction("Index");
             }
 
-            return View(tblUserType);
+            return View(tblCompany);
         }
 
-        // GET: tblUserTypes/Edit/5
+        // GET: tblCompanies/Edit/5
         public ActionResult Edit(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
@@ -90,20 +104,20 @@ namespace CloudERP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblUserType tblUserType = db.tblUserTypes.Find(id);
-            if (tblUserType == null)
+            tblCompany tblCompany = db.tblCompanies.Find(id);
+            if (tblCompany == null)
             {
                 return HttpNotFound();
             }
-            return View(tblUserType);
+            return View(tblCompany);
         }
 
-        // POST: tblUserTypes/Edit/5
+        // POST: tblCompanies/Edit/5
         // Aşırı gönderim saldırılarından korunmak için bağlamak istediğiniz belirli özellikleri etkinleştirin. 
         // Daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( tblUserType tblUserType)
+        public ActionResult Edit(tblCompany tblCompany)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
             {
@@ -112,14 +126,25 @@ namespace CloudERP.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(tblUserType).State = EntityState.Modified;
+                if (tblCompany.LogoFile != null)
+                {
+                    var folder = "~/Content/CompanyLogos";
+                    var file = string.Format("{0}.jpg", tblCompany.CompanyID);
+                    var response = FileHelpers.UploadPhoto(tblCompany.LogoFile, folder, file);
+                    if (response)
+                    {
+                        var pic = string.Format("{0}/{1}", folder, file);
+                        tblCompany.Logo = pic;
+                    }
+                }
+                db.Entry(tblCompany).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tblUserType);
+            return View(tblCompany);
         }
 
-        // GET: tblUserTypes/Delete/5
+        // GET: tblCompanies/Delete/5
         public ActionResult Delete(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
@@ -131,15 +156,15 @@ namespace CloudERP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblUserType tblUserType = db.tblUserTypes.Find(id);
-            if (tblUserType == null)
+            tblCompany tblCompany = db.tblCompanies.Find(id);
+            if (tblCompany == null)
             {
                 return HttpNotFound();
             }
-            return View(tblUserType);
+            return View(tblCompany);
         }
 
-        // POST: tblUserTypes/Delete/5
+        // POST: tblCompanies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -149,8 +174,8 @@ namespace CloudERP.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
-            tblUserType tblUserType = db.tblUserTypes.Find(id);
-            db.tblUserTypes.Remove(tblUserType);
+            tblCompany tblCompany = db.tblCompanies.Find(id);
+            db.tblCompanies.Remove(tblCompany);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

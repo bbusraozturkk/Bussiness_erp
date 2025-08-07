@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DatabaseAccess.tblCompany>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New Company", "Create", "tblCompanies", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="card">
+    <div class="card-header">All Companies</div>
+    <div class="card-body">
+        <div class="table-responsive bootgrid">
+
+            <table class="table table-striped" id="bootgrid-basic">
+                <thead>
+                    <tr>
+                        <th data-column-id="id">Company</th>
+                        <th data-column-id="sender">Logo</th>
+                        <th data-column-id="received">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                
+                                @if (!string.IsNullOrEmpty(item.Logo))
+                                {
+                                    <img src="@Url.Content(item.Logo)" alt="Img" style="width:50px;height:50px;max-width:100%;height:auto;" />
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CompanyID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

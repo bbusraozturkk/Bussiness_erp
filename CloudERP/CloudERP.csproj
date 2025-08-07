@@ -128,11 +128,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\tblCompaniesController.cs" />
     <Compile Include="Controllers\tblUsersController.cs" />
     <Compile Include="Controllers\tblUserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperCls\FileHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +394,11 @@
     <Content Include="Views\tblUsers\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\tblCompanies\Create.cshtml" />
+    <Content Include="Views\tblCompanies\Delete.cshtml" />
+    <Content Include="Views\tblCompanies\Details.cshtml" />
+    <Content Include="Views\tblCompanies\Edit.cshtml" />
+    <Content Include="Views\tblCompanies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

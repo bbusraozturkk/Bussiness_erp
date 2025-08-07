@@ -17,6 +17,11 @@ namespace CloudERP.Controllers
         // GET: tblUsers
         public ActionResult Index()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             var tblUser = db.tblUser.Include(t => t.tblUserType);
             return View(tblUser.ToList());
         }
@@ -24,6 +29,11 @@ namespace CloudERP.Controllers
         // GET: tblUsers/Details/5
         public ActionResult Details(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +49,11 @@ namespace CloudERP.Controllers
         // GET: tblUsers/Create
         public ActionResult Create()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             ViewBag.UserTypeID = new SelectList(db.tblUserTypes, "UserTypeID", "UserType");
             return View();
         }
@@ -50,6 +65,11 @@ namespace CloudERP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,UserTypeID,FullName,Email,ContactNo,UserName,Password,IsActive")] tblUser tblUser)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             if (ModelState.IsValid)
             {
                 db.tblUser.Add(tblUser);
@@ -64,6 +84,11 @@ namespace CloudERP.Controllers
         // GET: tblUsers/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +109,11 @@ namespace CloudERP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,UserTypeID,FullName,Email,ContactNo,UserName,Password,IsActive")] tblUser tblUser)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(tblUser).State = EntityState.Modified;
@@ -97,6 +127,11 @@ namespace CloudERP.Controllers
         // GET: tblUsers/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +149,11 @@ namespace CloudERP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["CompanyID"])))
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             tblUser tblUser = db.tblUser.Find(id);
             db.tblUser.Remove(tblUser);
             db.SaveChanges();

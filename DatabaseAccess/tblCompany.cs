@@ -11,7 +11,10 @@ namespace DatabaseAccess
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class tblCompany
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,8 +33,15 @@ namespace DatabaseAccess
         }
     
         public int CompanyID { get; set; }
+
+        [Required(ErrorMessage="Required")]
         public string Name { get; set; }
+
+        [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase LogoFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAccountControl> tblAccountControls { get; set; }
