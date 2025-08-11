@@ -1,49 +1,62 @@
 ﻿@model IEnumerable<DatabaseAccess.tblCompany>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of all Companies";
 }
-
+<script src="~/Scripts/jquery-3.7.0.js"></script>
 <p>
-    @Html.ActionLink("Create New Company", "Create", "tblCompanies", null, new { @class = "btn btn-primary" })
+ 
 </p>
 
 <div class="card">
-    <div class="card-header">All Companies</div>
-    <div class="card-body">
-        <div class="table-responsive bootgrid">
-
-            <table class="table table-striped" id="bootgrid-basic">
-                <thead>
-                    <tr>
-                        <th data-column-id="id">Company</th>
-                        <th data-column-id="sender">Logo</th>
-                        <th data-column-id="received">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+    <div class="card card-flat">
+        <div class="card-header">
+            @Html.ActionLink("Add Company Title", "Create", null, new {@style="float:right;" , @class="btn btn-primary"})
+            <input type="text" id="searchcompany" name="searchcompany" class="form-control col-md-3" placeholder="search here" />
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="dataTable">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                
-                                @if (!string.IsNullOrEmpty(item.Logo))
-                                {
-                                    <img src="@Url.Content(item.Logo)" alt="Img" style="width:50px;height:50px;max-width:100%;height:auto;" />
-                                }
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.CompanyID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
-                            </td>
+                            <th><p class="text-info">Company</p></th>
+                            <th><p class="text-info">Logo</p></th>
+                            <th><p class="text-info">Settings</p></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="companylist">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Logo))
+                                    {
+                                        <img src="@Url.Content(item.Logo)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Update Profile", "Edit", new { id = item.CompanyID }, new { @class = "btn btn-pill-left" })
+                                    @Html.ActionLink("View Profile", "Details", new { id = item.CompanyID }, new { @class = "btn btn-pill-right" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#searchcompany").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#companylist tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

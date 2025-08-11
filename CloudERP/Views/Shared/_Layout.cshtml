@@ -282,6 +282,12 @@
                                 <span data-localize="sidebar.nav.element.ELEMENTS">Companies</span>
                             </a>
                         </li>
+                        <li class="">
+                            <a href="@Url.Action("Index","tblUsers")" title="Companies">
+                                <em class="icon-chemistry"></em>
+                                <span data-localize="sidebar.nav.element.ELEMENTS">Users</span>
+                            </a>
+                        </li>
                         <li class="nav-heading ">
                             <span data-localize="sidebar.heading.COMPONENTS">Components</span>
                         </li>
@@ -1214,6 +1220,7 @@
     <script src="~/Content/Template/js/app.js"></script>
     <script src="~/Content/Template/vendor/jquery-bootgrid/dist/jquery.bootgrid.js"></script>
     <script src="~/Content/Template/vendor/jquery-bootgrid/dist/jquery.bootgrid.fa.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
